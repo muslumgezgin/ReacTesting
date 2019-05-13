@@ -3,8 +3,9 @@ const http = require('http');
 const bodyParser = require('body-parser');
 const morgan = require('morgan');
 const app = express();
-const router=require('./router');
-const mongoose =require('mongoose')
+const router = require('./router');
+const mongoose = require('mongoose');
+const cors = require('cors');
 
 mongoose.set('useNewUrlParser', true);
 mongoose.set('useFindAndModify', false);
@@ -14,6 +15,7 @@ mongoose.set('useCreateIndex', true);
 mongoose.connect('mongodb://localhost:27017/auth');
 //app setup
 
+app.use(cors())
 app.use(morgan('combined'));
 app.use(bodyParser.json({ type: '*/*' }));
 router(app);
